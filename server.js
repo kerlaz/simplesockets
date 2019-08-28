@@ -1,6 +1,19 @@
-const WebSocket = require("ws");
+const WebSocketServer = require("ws").Server;
+const http = require('http');
+const express = require('express');
+const app = express();
+const port = process.env.PORT || 5000;
 
-const wss = new WebSocket.Server({ port: 8080});
+app.use(express.static(__dirname + '/'));
+
+const server = http.createServer(app);
+server.listen(port);
+
+console.log(`server listening on ${port}`);
+
+const wss = new WebSocket.Server({ server: server});
+
+console.log('websocket server created');
 
 let uid = 0;
 wss.on('connection', ws => {
