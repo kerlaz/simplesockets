@@ -1,0 +1,15 @@
+{
+  "name": "simplesocket",
+  "version": "1.0.0",
+  "main": "server.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
+  },
+  "dependencies": {
+    "ws": "^7.1.2"
+  }
+}
