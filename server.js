@@ -25,13 +25,13 @@ wss.on('connection', ws => {
         type: 'system'
     }));
     ws.on('message', message => {
-        const parsed = JSON.parse(message.data);
+        const parsed = JSON.parse(message);
         const { type } = parsed;
         wss.clients.forEach(client => {
-            if(ws.id !== client.id) {
+            if(ws.id !== client.id && type !== 'system') {
                 client.send(message);
                 console.log(`Message from User #${ws.id} is sent`)
-            } else {
+            } else if(ws.id === client.id) {
                 if(type === 'system' && parsed.text === 'ping'){
                     client.send(JSON.stringify({
                         type: 'system',
